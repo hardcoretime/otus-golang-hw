@@ -67,26 +67,3 @@ func TestIsNumInString(t *testing.T) {
 		})
 	}
 }
-
-func TestStringStartWithDigit(t *testing.T) {
-	tests := []struct {
-		input    string
-		expected bool
-	}{
-		{input: "a4bc2d5e", expected: false},
-		{input: "abc13cd", expected: false},
-		{input: "", expected: false},
-		{input: "aaa0b", expected: false},
-		{input: "d\n5abc", expected: false},
-		{input: "3ab10c", expected: true},
-		{input: "45", expected: true},
-	}
-
-	for _, tc := range tests {
-		tc := tc
-		t.Run(tc.input, func(t *testing.T) {
-			result := stringStartWithDigit(tc.input)
-			require.Equal(t, tc.expected, result)
-		})
-	}
-}

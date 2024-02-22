@@ -13,7 +13,7 @@ func Top10(s string) []string {
 	words := strings.Fields(s)
 	wordCount := make(map[string]int, len(words))
 	for _, word := range words {
-		wordCount[word] += 1
+		wordCount[word]++
 	}
 
 	wordList := make([]Word, len(wordCount))

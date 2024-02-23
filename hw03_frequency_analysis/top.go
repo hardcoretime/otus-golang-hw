@@ -32,7 +32,7 @@ func Top10(s string) []string {
 	})
 
 	resultCap := 10
-	if len(wordList) < 10 {
+	if len(wordList) < resultCap {
 		resultCap = len(wordList)
 	}
 	result := make([]string, 0, resultCap)

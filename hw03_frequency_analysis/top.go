@@ -31,9 +31,13 @@ func Top10(s string) []string {
 		return wordList[i].Count > wordList[j].Count
 	})
 
-	result := make([]string, 10)
-	for i := 0; i < 10; i++ {
-		result[i] = wordList[i].Word
+	resultCap := 10
+	if len(wordList) < 10 {
+		resultCap = len(wordList)
+	}
+	result := make([]string, 0, resultCap)
+	for i := 0; i < resultCap; i++ {
+		result = append(result, wordList[i].Word)
 	}
 
 	return result

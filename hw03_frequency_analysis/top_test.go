@@ -43,12 +43,44 @@ var text = `Как видите, он  спускается  по  лестни�
 	посидеть у огня и послушать какую-нибудь интересную сказку.
 		В этот вечер...`
 
+var loremIpsum = `Lorem Ipsum - это текст-"рыба", часто используемый в
+	печати и вэб-дизайне.
+	Lorem Ipsum является стандартной "рыбой" для текстов на латинице с начала XVI века.
+	В то время некий безымянный печатник создал большую коллекцию размеров и форм шрифтов,
+	используя Lorem Ipsum для распечатки образцов.
+	Lorem Ipsum не только успешно пережил без заметных изменений пять веков,
+	но и перешагнул в электронный дизайн.
+	Его популяризации в новое время послужили публикация листов Letraset
+	с образцами Lorem Ipsum в 60-х годах и,
+	в более недавнее время, программы электронной вёрстки типа Aldus PageMaker,
+	в шаблонах которых используется Lorem Ipsum.`
+
+var catsAndDogsAndMens = `cat and dog, one dog,two cats and one man`
+
 func TestTop10(t *testing.T) {
 	t.Run("no words in empty string", func(t *testing.T) {
 		require.Len(t, Top10(""), 0)
 	})
 
-	t.Run("positive test", func(t *testing.T) {
+	t.Run("positive test 1", func(t *testing.T) {
+		if !taskWithAsteriskIsCompleted {
+			expected := []string{
+				"Lorem",     // 6
+				"в",         // 6
+				"Ipsum",     // 5
+				"и",         // 3
+				"время",     // 2
+				"для",       // 2
+				"с",         // 2
+				"\"рыбой\"", // 1
+				"-",         // 1
+				"60-х",      // 1
+			}
+			require.Equal(t, expected, Top10(loremIpsum))
+		}
+	})
+
+	t.Run("positive test 2", func(t *testing.T) {
 		if taskWithAsteriskIsCompleted {
 			expected := []string{
 				"а",         // 8
@@ -77,6 +109,13 @@ func TestTop10(t *testing.T) {
 				"то",        // 4
 			}
 			require.Equal(t, expected, Top10(text))
+		}
+	})
+
+	t.Run("slice length test", func(t *testing.T) {
+		if !taskWithAsteriskIsCompleted {
+			expectedLen := 7
+			require.Equal(t, expectedLen, len(Top10(catsAndDogsAndMens)))
 		}
 	})
 }
